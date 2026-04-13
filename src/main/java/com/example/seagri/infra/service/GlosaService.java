@@ -86,11 +86,16 @@ public class GlosaService {
     private GlosaRecord processarUma(GlosaTransactionInputDTO input, String processedBy) {
         List<String> violacoes = new ArrayList<>();
         String status = "APROVADO";
+        boolean isReserva = input.isReservaTransito();
 
         LocalDateTime timestamp = parseTimestamp(input.timestamp());
         Vehicle vehicle = vehicleRepository.findByLicensePlate(input.placa()).orElse(null);
 
-        // ── REGRA 1: Geofencing ───────────────────────────────────────────────
+        if (isReserva) {
+            violacoes.add("RESERVA_TRANSITO: volume registrado como estoque vinculado à OS (KSD e tanque ignorados)");
+        }
+
+        // ── REGRA 1: Geofencing — aplica-se SEMPRE, inclusive para Reserva em Trânsito
         if (input.veiculoCoordenadas() != null && input.postoCoordenadas() != null) {
             double distancia = haversineMetros(
                     input.veiculoCoordenadas().lat(), input.veiculoCoordenadas().lng(),
@@ -105,23 +110,25 @@ public class GlosaService {
             if (status.equals("APROVADO")) status = "ALERTA";
         }
 
-        // ── REGRA 2: Capacidade Volumétrica ──────────────────────────────────
-        if (vehicle != null && vehicle.getTankCapacity() != null) {
-            double capacidade = vehicle.getTankCapacity().doubleValue();
-            if (input.volumeLitros() > capacidade) {
-                violacoes.add(String.format(
-                        "VOLUMETRICO: %.2fL supera capacidade do tanque %.2fL — Risco de Desvio",
-                        input.volumeLitros(), capacidade));
-                if (!status.equals("GLOSADO")) status = "GLOSADO";
+        // ── REGRA 2: Capacidade Volumétrica — IGNORADA para Reserva em Trânsito
+        if (!isReserva) {
+            if (vehicle != null && vehicle.getTankCapacity() != null) {
+                double capacidade = vehicle.getTankCapacity().doubleValue();
+                if (input.volumeLitros() > capacidade) {
+                    violacoes.add(String.format(
+                            "VOLUMETRICO: %.2fL supera capacidade do tanque %.2fL — Risco de Desvio",
+                            input.volumeLitros(), capacidade));
+                    if (!status.equals("GLOSADO")) status = "GLOSADO";
+                }
+            } else {
+                String motivo = vehicle == null ? "Placa não cadastrada" : "Capacidade do tanque não cadastrada";
+                violacoes.add("VOLUMETRICO: " + motivo + " — revisão manual necessária");
+                if (status.equals("APROVADO")) status = "ALERTA";
             }
-        } else {
-            String motivo = vehicle == null ? "Placa não cadastrada" : "Capacidade do tanque não cadastrada";
-            violacoes.add("VOLUMETRICO: " + motivo + " — revisão manual necessária");
-            if (status.equals("APROVADO")) status = "ALERTA";
         }
 
-        // ── REGRA 3: KSD — Consumo Médio (Km/L) ──────────────────────────────
-        if (input.odomteroInformado() != null) {
+        // ── REGRA 3: KSD — Consumo Médio (Km/L) — IGNORADA para Reserva em Trânsito
+        if (!isReserva && input.odomteroInformado() != null) {
             List<Supply> anteriores = supplyRepository.findLatestSupplyByPlate(
                     input.placa(), timestamp, PageRequest.of(0, 1));
 
@@ -150,10 +157,13 @@ public class GlosaService {
             }
         }
 
-        // ── Hash de Fé Pública ────────────────────────────────────────────────
+        // ── Hash de Fé Pública com encadeamento ──────────────────────────────
         String observacao = violacoes.isEmpty() ? "Todos os critérios aprovados."
                 : String.join(" | ", violacoes);
-        String hashInput  = input.transacaoId() + "|" + input.placa() + "|" + input.timestamp() + "|" + status;
+
+        String previousHash = getLastRecordHash();
+        String hashInput = previousHash + "|" + input.transacaoId() + "|" + input.placa()
+                + "|" + input.timestamp() + "|" + status;
         String integrityHash = hashService.generate(hashInput);
 
         BigDecimal postoLat  = input.postoCoordenadas() != null
@@ -163,15 +173,25 @@ public class GlosaService {
         BigDecimal valorTotal = input.valorTotal() != null
                 ? BigDecimal.valueOf(input.valorTotal()) : null;
 
+        String combustivelLabel = isReserva
+                ? "RESERVA_TRANSITO — " + (input.combustivel() != null ? input.combustivel() : "N/I")
+                : input.combustivel();
+
         GlosaRecord record = new GlosaRecord(
                 input.transacaoId(), timestamp, input.placa(),
                 input.postoCnpj(), postoLat, postoLng,
-                input.combustivel(), BigDecimal.valueOf(input.volumeLitros()),
+                combustivelLabel, BigDecimal.valueOf(input.volumeLitros()),
                 input.odomteroInformado(), valorTotal,
                 status, observacao, integrityHash,
                 LocalDateTime.now(), processedBy);
 
         return glosaRepository.save(record);
+    }
+
+    private String getLastRecordHash() {
+        return glosaRepository.findTopByOrderByIdDesc()
+                .map(GlosaRecord::getIntegrityHash)
+                .orElse("GENESIS");
     }
 
     // ── Utilitários ──────────────────────────────────────────────────────────

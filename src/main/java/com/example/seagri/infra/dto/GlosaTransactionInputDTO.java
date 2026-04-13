@@ -49,8 +49,18 @@ public record GlosaTransactionInputDTO(
     /** GPS do veículo no momento do abastecimento — opcional.
      *  Se ausente, o protocolo de contingência é aplicado. */
     @JsonProperty("veiculo_coordenadas")
-    CoordenadaDTO veiculoCoordenadas
+    CoordenadaDTO veiculoCoordenadas,
+
+    /** Quando true, classifica como "Reserva em Trânsito" (galões para viagens longas).
+     *  Geofencing é validado normalmente, mas KSD e limite de tanque são ignorados.
+     *  O volume é registrado como estoque vinculado à OS da viagem. */
+    @JsonProperty("reserva_transito")
+    Boolean reservaTransito
 
 ) {
     public record CoordenadaDTO(double lat, double lng) {}
+
+    public boolean isReservaTransito() {
+        return reservaTransito != null && reservaTransito;
+    }
 }

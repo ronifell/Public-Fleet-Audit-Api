@@ -31,8 +31,12 @@ public class AuditLogService {
                            Long userId, String userLogin, String description) {
         AuditLog log = new AuditLog(entityType, entityId, action, userId, userLogin, description);
 
-        // Gera o hash do próprio log para garantir que ele também não seja adulterado
+        String previousHash = repository.findTopByOrderByIdDesc()
+                .map(AuditLog::getIntegrityHash)
+                .orElse("GENESIS");
+
         String hashInput = String.join("|",
+                previousHash,
                 entityType,
                 entityId    != null ? entityId.toString()  : "",
                 action,

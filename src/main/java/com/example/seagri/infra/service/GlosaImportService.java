@@ -172,7 +172,7 @@ public class GlosaImportService {
             return new GlosaTransactionInputDTO(
                     transacaoId, timestamp, placa, postoCnpj,
                     postoCoordenadas, combustivel, volumeLitros,
-                    odometro, valorTotal, veiculoCoordenadas);
+                    odometro, valorTotal, veiculoCoordenadas, null);
 
         } catch (Exception e) {
             return null; // linha malformada é pulada silenciosamente

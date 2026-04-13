@@ -3,6 +3,7 @@ package com.example.seagri.infra.repository;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -12,6 +13,8 @@ import com.example.seagri.infra.model.GlosaRecord;
 public interface GlosaRepository extends JpaRepository<GlosaRecord, Long> {
 
     List<GlosaRecord> findByPlacaOrderByProcessedAtDesc(String placa);
+
+    Optional<GlosaRecord> findTopByOrderByIdDesc();
 
     @Query("SELECT COUNT(g) FROM GlosaRecord g WHERE g.glosaStatus = ?1")
     long countByStatus(String status);
