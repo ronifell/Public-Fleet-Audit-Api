@@ -40,6 +40,10 @@ public class AuditoriaMotorController {
         result.put("abastecimentos", service.getAbastecimentos());
         result.put("resultados_motor_glosa", service.getResultadosMotorGlosa());
         result.put("resumo_dashboard", service.getResumoDashboard());
+        result.put("bens_patrimonio", service.getBensPatrimonio());
+        result.put("transferencias_patrimonio", service.getTransferenciasPatrimonio());
+        result.put("cadeia_custodia_patrimonio", service.getCadeiaCustodiaPatrimonio());
+        result.put("resumo_patrimonio", service.getResumoPatrimonio());
         return ResponseEntity.ok(result);
     }
 
@@ -87,9 +91,26 @@ public class AuditoriaMotorController {
         return ResponseEntity.ok(service.getTrilhaAuditoria());
     }
 
-    /**
-     * Reloads DB.json from disk (useful when the file is updated externally).
-     */
+    @GetMapping("/patrimonio/bens")
+    public ResponseEntity<List<Map<String, Object>>> getBensPatrimonio() {
+        return ResponseEntity.ok(service.getBensPatrimonio());
+    }
+
+    @GetMapping("/patrimonio/transferencias")
+    public ResponseEntity<List<Map<String, Object>>> getTransferencias() {
+        return ResponseEntity.ok(service.getTransferenciasPatrimonio());
+    }
+
+    @GetMapping("/patrimonio/custodia")
+    public ResponseEntity<List<Map<String, Object>>> getCadeiaCustodia() {
+        return ResponseEntity.ok(service.getCadeiaCustodiaPatrimonio());
+    }
+
+    @GetMapping("/patrimonio/resumo")
+    public ResponseEntity<Map<String, Object>> getResumoPatrimonio() {
+        return ResponseEntity.ok(service.getResumoPatrimonio());
+    }
+
     @PostMapping("/reload")
     public ResponseEntity<Map<String, String>> reload() {
         service.reload();

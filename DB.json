@@ -1,7 +1,7 @@
 {
-  "_descricao": "Arquivo de exemplo — saída do Motor de Auditoria SEAGRI. Dados fictícios para integração de front-end.",
-  "_versao": "1.0",
-  "_geradoEm": "2026-03-30",
+  "_descricao": "Arquivo de exemplo — saída do Motor de Auditoria SEAGRI. Dados fictícios para integração de front-end. Inclui módulos SIG-FROTA e SIG-PATRIMÔNIO.",
+  "_versao": "2.0",
+  "_geradoEm": "2026-04-12",
 
   "abastecimentos": [
     {
@@ -194,6 +194,179 @@
     "valor_total_transacoes": 1908.69,
     "valor_glosado": 1357.74,
     "economia_gerada": 1357.74,
+    "violacoes_integridade_detectadas": 1
+  },
+
+  "bens_patrimonio": [
+    {
+      "id": 1,
+      "tombo": "PAT-AC-00421",
+      "descricao": "Imóvel histórico — Palácio Rio Branco (Sede Administrativa)",
+      "categoria": "Imóvel",
+      "inpiRegistro": "INPI-BR-2024-PAT-12A5F",
+      "lat": -9.974200,
+      "lng": -67.810500,
+      "conservacaoPercent": 87,
+      "responsavel": "Dr. Carlos Mendes",
+      "situacao": "Sincronizado / válido",
+      "valorPatrimonial": 4500000.00,
+      "dataRegistro": "2023-08-14T09:22:00",
+      "integrityHash": "aa11bb22cc33dd44ee55ff6677889900aabbccddeeff00112233445566778899"
+    },
+    {
+      "id": 2,
+      "tombo": "PAT-AC-00533",
+      "descricao": "Monumento tombado — Memorial dos Autonomistas",
+      "categoria": "Monumento",
+      "inpiRegistro": "INPI-BR-2024-PAT-13B6G",
+      "lat": -9.971800,
+      "lng": -67.805200,
+      "conservacaoPercent": 72,
+      "responsavel": "Profª Ana Beatriz Lima",
+      "situacao": "Em revisão pericial",
+      "valorPatrimonial": 2800000.00,
+      "dataRegistro": "2023-09-05T14:30:00",
+      "integrityHash": "bb22cc33dd44ee55ff6677889900aabbccddeeff00112233445566778899aa11"
+    },
+    {
+      "id": 3,
+      "tombo": "PAT-AC-00647",
+      "descricao": "Bem móvel catalogado — Acervo Documental Arquivo Público",
+      "categoria": "Bem Móvel",
+      "inpiRegistro": "INPI-BR-2024-PAT-14C7H",
+      "lat": -9.968500,
+      "lng": -67.812800,
+      "conservacaoPercent": 94,
+      "responsavel": "João Carlos Pereira",
+      "situacao": "Sincronizado / válido",
+      "valorPatrimonial": 850000.00,
+      "dataRegistro": "2023-10-18T10:15:00",
+      "integrityHash": "cc33dd44ee55ff6677889900aabbccddeeff00112233445566778899aa11bb22"
+    },
+    {
+      "id": 4,
+      "tombo": "PAT-AC-00758",
+      "descricao": "Acervo museológico — Museu da Borracha (coleção permanente)",
+      "categoria": "Acervo",
+      "inpiRegistro": "INPI-BR-2024-PAT-15D8I",
+      "lat": -9.976100,
+      "lng": -67.808900,
+      "conservacaoPercent": 65,
+      "responsavel": "Maria Aparecida Souza",
+      "situacao": "Em revisão pericial",
+      "valorPatrimonial": 3200000.00,
+      "dataRegistro": "2023-11-22T16:45:00",
+      "integrityHash": "dd44ee55ff6677889900aabbccddeeff00112233445566778899aa11bb22cc33"
+    },
+    {
+      "id": 5,
+      "tombo": "PAT-AC-00869",
+      "descricao": "Patrimônio público — Centro Cultural Thaumaturgo de Azevedo",
+      "categoria": "Imóvel",
+      "inpiRegistro": "INPI-BR-2025-PAT-16E9J",
+      "lat": -9.980300,
+      "lng": -67.801400,
+      "conservacaoPercent": 78,
+      "responsavel": "Roberto Nascimento",
+      "situacao": "Sincronizado / válido",
+      "valorPatrimonial": 1950000.00,
+      "dataRegistro": "2024-01-10T08:30:00",
+      "integrityHash": "ee55ff6677889900aabbccddeeff00112233445566778899aa11bb22cc33dd44"
+    },
+    {
+      "id": 6,
+      "tombo": "PAT-AC-00972",
+      "descricao": "Sítio arqueológico — Geoglifos do Acre (Zona Rural)",
+      "categoria": "Sítio",
+      "inpiRegistro": "INPI-BR-2025-PAT-17F0K",
+      "lat": -10.023000,
+      "lng": -67.845000,
+      "conservacaoPercent": 91,
+      "responsavel": "Dra. Fernanda Oliveira",
+      "situacao": "Sincronizado / válido",
+      "valorPatrimonial": 7500000.00,
+      "dataRegistro": "2024-02-28T11:00:00",
+      "integrityHash": "ff6677889900aabbccddeeff00112233445566778899aa11bb22cc33dd44ee55"
+    }
+  ],
+
+  "transferencias_patrimonio": [
+    {
+      "id": 1,
+      "assetId": 2,
+      "tombo": "PAT-AC-00533",
+      "enviadoPor": "Secretaria de Cultura",
+      "recebidoPor": "Fundação Elias Mansour",
+      "localAnterior": "Dep. Patrimônio — Sede SEAGRI",
+      "localAtual": "Memorial dos Autonomistas — Praça da Revolução",
+      "dataTransferencia": "2024-03-15T09:00:00",
+      "integrityHash": "1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b"
+    },
+    {
+      "id": 2,
+      "assetId": 4,
+      "tombo": "PAT-AC-00758",
+      "enviadoPor": "Museu da Borracha",
+      "recebidoPor": "Laboratório de Restauro — UFAC",
+      "localAnterior": "Museu da Borracha — Sala Expositiva",
+      "localAtual": "UFAC — Laboratório de Conservação",
+      "dataTransferencia": "2024-05-20T14:30:00",
+      "integrityHash": "2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c"
+    }
+  ],
+
+  "cadeia_custodia_patrimonio": [
+    {
+      "id": 1,
+      "tombo": "PAT-AC-00421",
+      "etapa": "tombamento",
+      "titulo": "Tombamento inicial",
+      "descricao": "Registro definitivo do bem PAT-AC-00421 — livro tombo digital AP04.",
+      "data": "2023-08-14T09:22:00",
+      "responsavel": "Dr. Carlos Mendes",
+      "integrityHash": "a1a2a3a4a5a6a7a8a9a0b1b2b3b4b5b6b7b8b9b0c1c2c3c4c5c6c7c8c9c0d1d2"
+    },
+    {
+      "id": 2,
+      "tombo": "PAT-AC-00421",
+      "etapa": "cautela",
+      "titulo": "Termo de cautela",
+      "descricao": "Responsabilidade formal do gestor e vinculação ao inventário SIG-PATRIMÔNIO.",
+      "data": "2024-01-20T14:05:00",
+      "responsavel": "Dr. Carlos Mendes",
+      "integrityHash": "b2b3b4b5b6b7b8b9b0c1c2c3c4c5c6c7c8c9c0d1d2d3d4d5d6d7d8d9d0e1e2e3",
+      "tampered": true
+    },
+    {
+      "id": 3,
+      "tombo": "PAT-AC-00421",
+      "etapa": "vistoria",
+      "titulo": "Vistoria 1 — censo",
+      "descricao": "Georreferenciamento e índice de conservação homologados.",
+      "data": "2024-06-02T11:40:00",
+      "responsavel": "Fiscal CGE — Alberto Ramos",
+      "integrityHash": "c3c4c5c6c7c8c9c0d1d2d3d4d5d6d7d8d9d0e1e2e3e4e5e6e7e8e9e0f1f2f3f4"
+    },
+    {
+      "id": 4,
+      "tombo": "PAT-AC-00421",
+      "etapa": "vistoria",
+      "titulo": "Vistoria 2 — fé pública (atual)",
+      "descricao": "Captura AP04 com carimbo dinâmico GPS + timestamp — trilha ativa.",
+      "data": "2026-04-10T15:30:00",
+      "responsavel": "Perito — Dra. Fernanda Oliveira",
+      "integrityHash": "d4d5d6d7d8d9d0e1e2e3e4e5e6e7e8e9e0f1f2f3f4f5f6f7f8f9f0a1a2a3a4a5"
+    }
+  ],
+
+  "resumo_patrimonio": {
+    "periodo": "2023-08-01 a 2026-04-12",
+    "total_bens_catalogados": 6,
+    "total_vistorias_realizadas": 4,
+    "total_transferencias": 2,
+    "valor_patrimonial_total": 20800000.00,
+    "bens_sincronizados": 4,
+    "bens_em_revisao": 2,
     "violacoes_integridade_detectadas": 1
   }
 }

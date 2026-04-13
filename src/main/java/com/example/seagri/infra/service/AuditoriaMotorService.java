@@ -96,4 +96,28 @@ public class AuditoriaMotorService {
         Object val = fullData.get("trilha_auditoria");
         return val instanceof List ? (List<Map<String, Object>>) val : Collections.emptyList();
     }
+
+    @SuppressWarnings("unchecked")
+    public List<Map<String, Object>> getBensPatrimonio() {
+        Object val = fullData.get("bens_patrimonio");
+        return val instanceof List ? (List<Map<String, Object>>) val : Collections.emptyList();
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<Map<String, Object>> getTransferenciasPatrimonio() {
+        Object val = fullData.get("transferencias_patrimonio");
+        return val instanceof List ? (List<Map<String, Object>>) val : Collections.emptyList();
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<Map<String, Object>> getCadeiaCustodiaPatrimonio() {
+        Object val = fullData.get("cadeia_custodia_patrimonio");
+        return val instanceof List ? (List<Map<String, Object>>) val : Collections.emptyList();
+    }
+
+    @SuppressWarnings("unchecked")
+    public Map<String, Object> getResumoPatrimonio() {
+        Object val = fullData.get("resumo_patrimonio");
+        return val instanceof Map ? (Map<String, Object>) val : Collections.emptyMap();
+    }
 }
