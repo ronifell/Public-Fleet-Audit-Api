@@ -36,7 +36,7 @@ public class Supply extends BaseEntity implements Hashable {
     @Column(columnDefinition = "VARCHAR(55)")
     private String car_model;
     
-    @Column(columnDefinition = "CHAR(4)")
+    @Column(name = "`year`", columnDefinition = "CHAR(4)")
     private String year;
     
     @Column(columnDefinition = "VARCHAR(10)")

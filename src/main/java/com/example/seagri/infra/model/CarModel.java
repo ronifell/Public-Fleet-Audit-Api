@@ -26,7 +26,7 @@ public class CarModel extends BaseEntity{
     @Column(nullable = false, unique = true)
     private String name;
 
-    @Column(nullable = false, updatable = false, columnDefinition="CHAR(4)")
+    @Column(name = "`year`", nullable = false, updatable = false, columnDefinition="CHAR(4)")
     private String year;
 
     @Column(nullable = false, columnDefinition = "CHAR(1)")

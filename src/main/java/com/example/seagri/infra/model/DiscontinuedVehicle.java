@@ -23,10 +23,10 @@ public class DiscontinuedVehicle extends BaseEntity{
     @OneToOne(optional = false)
     private Vehicle vehicle;
 
-    @Column(nullable = false, updatable = false)
+    @Column(name = "`date`", nullable = false, updatable = false)
     private LocalDate date;
 
-    @Column(nullable = false, updatable = false)
+    @Column(name = "`time`", nullable = false, updatable = false)
     private LocalTime time;
 
     @Column(nullable = false, updatable = false, unique = true)
