@@ -37,11 +37,11 @@ public class User extends BaseEntity {
     @Column(unique = true)
     private String registrationNumber;
 
-    @Column(nullable = false, columnDefinition = "VARCHAR(255) DEFAULT 'AVAILABLE'")
+    @Column(nullable = false)
     @Value("'AVAILABLE'")
     private String status;
 
-    @Column(nullable = false, columnDefinition = "TINYINT(1) NOT NULL DEFAULT 1")
+    @Column(nullable = false)
     @Value("true")
     private Boolean active = true;
 

@@ -136,11 +136,11 @@ public class Checklist extends BaseEntity{
     private String documentoVeiculo;
 
     @Lob
-    @Column(columnDefinition = "LONGBLOB")
+    @Column
     private byte[] assinaturaResponsavel;
 
     @Lob
-    @Column(columnDefinition = "LONGBLOB")
+    @Column
     private byte[] assinaturaMotorista;
     
 }

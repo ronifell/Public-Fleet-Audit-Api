@@ -66,7 +66,7 @@ public class Vehicle extends BaseEntity{
         inverseJoinColumns = @JoinColumn(name = "FUEL_ID"))
     private List<Fuel> fuels;
 
-    @Column(nullable = false, columnDefinition = "TINYINT(1) NOT NULL DEFAULT 1")
+    @Column(nullable = false)
     @Value("true")
     private Boolean active = true;
 

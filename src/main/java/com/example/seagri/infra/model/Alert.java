@@ -41,7 +41,7 @@ public class Alert extends BaseEntity {
     @Column(precision = 8, scale = 2)
     private BigDecimal alertQuilometers;
 
-    @Column(nullable = false, columnDefinition = "TINYINT(1)")
+    @Column(nullable = false)
     private boolean enabled;
 
     public boolean isEnabled() {
