@@ -19,6 +19,7 @@ public record GlosaResultDTO(
     String glosaStatus,
     String observacao,
     String integrityHash,
+    LocalDateTime serverTimestamp,
     LocalDateTime processedAt,
     String processedBy
 ) {
@@ -27,7 +28,7 @@ public record GlosaResultDTO(
             r.getId(), r.getTransacaoId(), r.getPlaca(), r.getCombustivel(),
             r.getVolumeLitros(), r.getOdomteroInformado(), r.getValorTotal(),
             r.getGlosaStatus(), r.getObservacao(), r.getIntegrityHash(),
-            r.getProcessedAt(), r.getProcessedBy()
+            r.getServerTimestamp(), r.getProcessedAt(), r.getProcessedBy()
         );
     }
 }

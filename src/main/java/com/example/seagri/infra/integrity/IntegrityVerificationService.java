@@ -120,7 +120,7 @@ public class IntegrityVerificationService {
         String previousHash = "GENESIS";
         for (GlosaRecord r : records) {
             String hashInput = previousHash + "|" + r.getTransacaoId() + "|" + r.getPlaca()
-                    + "|" + (r.getTransacaoTimestamp() != null ? r.getTransacaoTimestamp().toString() : "")
+                    + "|" + (r.getServerTimestamp() != null ? r.getServerTimestamp().toString() : "")
                     + "|" + r.getGlosaStatus();
             String expectedHash = hashService.generate(hashInput);
 

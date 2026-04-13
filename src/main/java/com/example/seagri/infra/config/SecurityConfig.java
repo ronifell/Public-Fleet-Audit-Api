@@ -62,6 +62,7 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.GET, "/vehicle/available/**").permitAll()
                 .requestMatchers("/auditoria/**").permitAll()
                 .requestMatchers("/patrimonio/**").permitAll()
+                .requestMatchers(HttpMethod.GET, "/audit/proof/**").permitAll()
                 .requestMatchers(HttpMethod.GET, "/report/**").hasAnyAuthority("ADMIN", "REPORT_READ")
                 .requestMatchers(HttpMethod.GET, "/integrity/**").hasAnyAuthority("ADMIN", "REPORT_READ")
                 .requestMatchers(HttpMethod.GET, "/audit/**").hasAnyAuthority("ADMIN", "AUDIT_READ")

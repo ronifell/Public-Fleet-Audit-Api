@@ -77,6 +77,13 @@ public class GlosaRecord {
     @Column(nullable = false, updatable = false, columnDefinition = "CHAR(64)")
     private String integrityHash;
 
+    /**
+     * Timestamp atômico do servidor no momento exato do recebimento da transação.
+     * NUNCA provém do dispositivo do cliente — garantia AP 04 de Fé Pública.
+     */
+    @Column(nullable = false, updatable = false)
+    private LocalDateTime serverTimestamp;
+
     @Column(nullable = false, updatable = false)
     private LocalDateTime processedAt;
 
@@ -91,7 +98,8 @@ public class GlosaRecord {
                        String postoCnpj, BigDecimal postoLat, BigDecimal postoLng,
                        String combustivel, BigDecimal volumeLitros, Integer odomteroInformado,
                        BigDecimal valorTotal, String glosaStatus, String observacao,
-                       String integrityHash, LocalDateTime processedAt, String processedBy) {
+                       String integrityHash, LocalDateTime serverTimestamp,
+                       LocalDateTime processedAt, String processedBy) {
         this.transacaoId = transacaoId;
         this.transacaoTimestamp = transacaoTimestamp;
         this.placa = placa;
@@ -105,6 +113,7 @@ public class GlosaRecord {
         this.glosaStatus = glosaStatus;
         this.observacao = observacao;
         this.integrityHash = integrityHash;
+        this.serverTimestamp = serverTimestamp;
         this.processedAt = processedAt;
         this.processedBy = processedBy;
     }
@@ -125,6 +134,7 @@ public class GlosaRecord {
     public String getGlosaStatus() { return glosaStatus; }
     public String getObservacao() { return observacao; }
     public String getIntegrityHash() { return integrityHash; }
+    public LocalDateTime getServerTimestamp() { return serverTimestamp; }
     public LocalDateTime getProcessedAt() { return processedAt; }
     public String getProcessedBy() { return processedBy; }
 }

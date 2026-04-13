@@ -157,13 +157,16 @@ public class GlosaService {
             }
         }
 
+        // ── Timestamp atômico: sempre do servidor, nunca do dispositivo ─────
+        LocalDateTime serverTimestamp = LocalDateTime.now(ZoneId.of("America/Rio_Branco"));
+
         // ── Hash de Fé Pública com encadeamento ──────────────────────────────
         String observacao = violacoes.isEmpty() ? "Todos os critérios aprovados."
                 : String.join(" | ", violacoes);
 
         String previousHash = getLastRecordHash();
         String hashInput = previousHash + "|" + input.transacaoId() + "|" + input.placa()
-                + "|" + input.timestamp() + "|" + status;
+                + "|" + serverTimestamp + "|" + status;
         String integrityHash = hashService.generate(hashInput);
 
         BigDecimal postoLat  = input.postoCoordenadas() != null
@@ -183,7 +186,7 @@ public class GlosaService {
                 combustivelLabel, BigDecimal.valueOf(input.volumeLitros()),
                 input.odomteroInformado(), valorTotal,
                 status, observacao, integrityHash,
-                LocalDateTime.now(), processedBy);
+                serverTimestamp, serverTimestamp, processedBy);
 
         return glosaRepository.save(record);
     }
