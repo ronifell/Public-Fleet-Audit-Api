@@ -46,7 +46,7 @@ public class AuditoriaMotorService {
                 is.close();
             }
         } catch (IOException e) {
-            throw new RuntimeException("Failed to load DB.json: " + e.getMessage(), e);
+            System.err.println("WARNING: DB.json not found — AuditoriaMotorService will return empty data. " + e.getMessage());
         }
     }
 
