@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="tceReport" pageWidth="595" pageHeight="842"
+              whenNoDataType="AllSectionsNoDetail"
+              columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20"
+              uuid="ctce0003-0003-0003-0003-000000000003">
+
+  <style name="Title"   forecolor="#FFFFFF" fontName="Times New Roman" fontSize="22" isBold="true"/>
+  <style name="Label"   fontName="Times New Roman" fontSize="13" isBold="true"/>
+  <style name="Value"   fontName="Times New Roman" fontSize="13"/>
+
+  <parameter name="mesReferencia"    class="java.lang.String"/>
+  <parameter name="totalVeiculos"    class="java.lang.String"/>
+  <parameter name="gastoBruto"       class="java.lang.String"/>
+  <parameter name="economiaReal"     class="java.lang.String"/>
+  <parameter name="gastoLiquido"     class="java.lang.String"/>
+  <parameter name="totalTransacoes"  class="java.lang.String"/>
+  <parameter name="certificadoHash"  class="java.lang.String"/>
+  <parameter name="sealHash"         class="java.lang.String"/>
+  <parameter name="sealTimestamp"    class="java.lang.String"/>
+  <parameter name="sealGeneratedBy"  class="java.lang.String"/>
+  <parameter name="generationDate"   class="java.lang.String"/>
+
+  <title>
+    <band height="80">
+      <frame>
+        <reportElement mode="Opaque" x="0" y="0" width="555" height="78" backcolor="#004400" uuid="tce-h1"/>
+        <staticText>
+          <reportElement style="Title" x="0" y="8" width="555" height="30" uuid="tce-t1"/>
+          <textElement textAlignment="Center"/>
+          <text><![CDATA[RELATÓRIO TCE — ROI E GESTÃO DE FROTA]]></text>
+        </staticText>
+        <textField>
+          <reportElement style="Title" x="0" y="44" width="555" height="26" uuid="tce-t2"/>
+          <textElement textAlignment="Center"><font fontSize="15"/></textElement>
+          <textFieldExpression><![CDATA["Referência: " + $P{mesReferencia}]]></textFieldExpression>
+        </textField>
+      </frame>
+    </band>
+  </title>
+
+  <detail>
+    <band height="320">
+      <!-- Bloco de dados consolidados -->
+      <frame>
+        <reportElement mode="Opaque" x="0" y="10" width="555" height="250" backcolor="#F8F8F8" uuid="tce-bloco"/>
+
+        <staticText>
+          <reportElement style="Label" x="20" y="20" width="250" height="22" uuid="tce-l1"/>
+          <text><![CDATA[Total de Veículos Auditados:]]></text>
+        </staticText>
+        <textField>
+          <reportElement style="Value" x="275" y="20" width="260" height="22" uuid="tce-v1"/>
+          <textFieldExpression><![CDATA[$P{totalVeiculos}]]></textFieldExpression>
+        </textField>
+
+        <staticText>
+          <reportElement style="Label" x="20" y="52" width="250" height="22" uuid="tce-l2"/>
+          <text><![CDATA[Total de Transações Processadas:]]></text>
+        </staticText>
+        <textField>
+          <reportElement style="Value" x="275" y="52" width="260" height="22" uuid="tce-v2"/>
+          <textFieldExpression><![CDATA[$P{totalTransacoes}]]></textFieldExpression>
+        </textField>
+
+        <staticText>
+          <reportElement style="Label" x="20" y="84" width="250" height="22" uuid="tce-l3"/>
+          <text><![CDATA[Gasto Bruto do Período:]]></text>
+        </staticText>
+        <textField>
+          <reportElement style="Value" x="275" y="84" width="260" height="22" uuid="tce-v3"/>
+          <textFieldExpression><![CDATA[$P{gastoBruto}]]></textFieldExpression>
+        </textField>
+
+        <staticText>
+          <reportElement style="Label" x="20" y="116" width="250" height="22" forecolor="#CC0000" uuid="tce-l4"/>
+          <textElement><font isBold="true" forecolor="#CC0000"/></textElement>
+          <text><![CDATA[Economia Real Gerada (Glosas):]]></text>
+        </staticText>
+        <textField>
+          <reportElement style="Value" x="275" y="116" width="260" height="22" forecolor="#CC0000" uuid="tce-v4"/>
+          <textFieldExpression><![CDATA[$P{economiaReal}]]></textFieldExpression>
+        </textField>
+
+        <staticText>
+          <reportElement style="Label" x="20" y="148" width="250" height="22" forecolor="#006600" uuid="tce-l5"/>
+          <textElement><font isBold="true" forecolor="#006600"/></textElement>
+          <text><![CDATA[Gasto Líquido (A Pagar):]]></text>
+        </staticText>
+        <textField>
+          <reportElement style="Value" x="275" y="148" width="260" height="22" forecolor="#006600" uuid="tce-v5"/>
+          <textFieldExpression><![CDATA[$P{gastoLiquido}]]></textFieldExpression>
+        </textField>
+
+        <!-- Separador -->
+        <line>
+          <reportElement x="10" y="182" width="535" height="1" forecolor="#CCCCCC" uuid="tce-line"/>
+        </line>
+
+        <staticText>
+          <reportElement x="20" y="192" width="535" height="18" forecolor="#000066" uuid="tce-lc1"/>
+          <textElement><font size="11" isBold="true"/></textElement>
+          <text><![CDATA[Certificado de Integridade SHA-256 do Banco:]]></text>
+        </staticText>
+        <textField isStretchWithOverflow="true">
+          <reportElement x="20" y="214" width="515" height="28" forecolor="#000066" uuid="tce-vc1"/>
+          <textElement><font size="9" fontName="Courier New" pdfFontName="Courier"/></textElement>
+          <textFieldExpression><![CDATA[$P{certificadoHash}]]></textFieldExpression>
+        </textField>
+      </frame>
+    </band>
+  </detail>
+
+  <pageFooter>
+    <band height="20">
+      <frame>
+        <reportElement mode="Opaque" x="0" y="0" width="555" height="18" backcolor="#1FB8FF" uuid="tce-pf"/>
+        <textField>
+          <reportElement x="2" y="1" width="300" height="16" forecolor="#FFFFFF" uuid="tce-pf1"/>
+          <textElement><font size="8"/></textElement>
+          <textFieldExpression><![CDATA[$P{generationDate}]]></textFieldExpression>
+        </textField>
+      </frame>
+    </band>
+  </pageFooter>
+
+  <summary>
+    <band height="90">
+      <frame>
+        <reportElement mode="Opaque" x="0" y="8" width="555" height="78" backcolor="#0d1b2a" uuid="tce-seal"/>
+        <staticText>
+          <reportElement x="10" y="5" width="535" height="18" forecolor="#FFD700" uuid="tce-sl1"/>
+          <textElement textAlignment="Center"><font size="11" isBold="true"/></textElement>
+          <text><![CDATA[SELO DE INTEGRIDADE — AUDITORIA INDEPENDENTE AP04 — TCE ROI]]></text>
+        </staticText>
+        <staticText>
+          <reportElement x="10" y="26" width="80" height="13" forecolor="#AAAAAA" uuid="tce-sl2"/>
+          <textElement><font size="8" isBold="true"/></textElement>
+          <text><![CDATA[Hash SHA-256:]]></text>
+        </staticText>
+        <textField>
+          <reportElement x="95" y="26" width="450" height="13" forecolor="#FFFFFF" uuid="tce-sl3"/>
+          <textElement><font size="8" fontName="Courier New" pdfFontName="Courier"/></textElement>
+          <textFieldExpression><![CDATA[$P{sealHash}]]></textFieldExpression>
+        </textField>
+        <staticText>
+          <reportElement x="10" y="43" width="80" height="13" forecolor="#AAAAAA" uuid="tce-sl4"/>
+          <textElement><font size="8" isBold="true"/></textElement>
+          <text><![CDATA[Gerado por:]]></text>
+        </staticText>
+        <textField>
+          <reportElement x="95" y="43" width="200" height="13" forecolor="#FFFFFF" uuid="tce-sl5"/>
+          <textElement><font size="8"/></textElement>
+          <textFieldExpression><![CDATA[$P{sealGeneratedBy}]]></textFieldExpression>
+        </textField>
+        <staticText>
+          <reportElement x="310" y="43" width="60" height="13" forecolor="#AAAAAA" uuid="tce-sl6"/>
+          <textElement><font size="8" isBold="true"/></textElement>
+          <text><![CDATA[Data/Hora:]]></text>
+        </staticText>
+        <textField>
+          <reportElement x="375" y="43" width="170" height="13" forecolor="#FFFFFF" uuid="tce-sl7"/>
+          <textElement><font size="8"/></textElement>
+          <textFieldExpression><![CDATA[$P{sealTimestamp}]]></textFieldExpression>
+        </textField>
+      </frame>
+    </band>
+  </summary>
+</jasperReport>

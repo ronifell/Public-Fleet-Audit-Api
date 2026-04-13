@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.2.final using JasperReports Library version 6.21.2-8434a0bd7c3bbc37cbf916f2968d35e4b165821a  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Cherry_Table_Based" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4eedbb89-b4f6-4469-9ab6-f642a1688cf7">
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="searchedBy" class="java.lang.String"/>
+	<parameter name="generationDate" class="java.lang.String"/>
+	<parameter name="periodString" class="java.lang.String"/>
+	<parameter name="path" class="java.lang.String"/>
+	<parameter name="suppliesDataSet" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="maintenancesDataSet" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="totalValueSupplies" class="java.lang.String"/>
+	<parameter name="totalValue" class="java.lang.String"/>
+	<parameter name="totalValueMaintenances" class="java.lang.String"/>
+	<parameter name="sealHash" class="java.lang.String"/>
+	<parameter name="sealTimestamp" class="java.lang.String"/>
+	<parameter name="sealGeneratedBy" class="java.lang.String"/>
+	<title>
+		<band height="96" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<frame>
+				<reportElement mode="Opaque" x="103" y="0" width="452" height="94" backcolor="#000000" uuid="17682764-df02-4019-b2d7-8e75ca15e0ac"/>
+				<staticText>
+					<reportElement style="Title" x="0" y="0" width="450" height="66" uuid="11ac3f46-a024-4077-8b0f-d70faad0f27d"/>
+					<textElement textAlignment="Center">
+						<font isBold="false"/>
+					</textElement>
+					<text><![CDATA[Relatório de Gastos]]></text>
+				</staticText>
+				<textField>
+					<reportElement style="SubTitle" x="80" y="66" width="368" height="29" uuid="d3ca5a61-0a5a-4fbe-abda-ede840dea154"/>
+					<textElement>
+						<font size="18" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Período: " + $P{periodString}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<image>
+				<reportElement x="20" y="0" width="69" height="95" uuid="1c2c5ea4-5382-4f22-aec0-1fe56f055cd9"/>
+				<imageExpression><![CDATA[$P{path} + "/Logo.ufac.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<detail>
+		<band height="122">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<frame>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="120" backcolor="#000000" uuid="29cf8b95-5e0d-4bb2-ace8-9a0dad34b8bb">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<staticText>
+					<reportElement x="20" y="10" width="352" height="30" forecolor="#FFFFFF" uuid="60c7ffc7-104a-4f35-99ae-2fb19f39edb2"/>
+					<textElement>
+						<font size="18"/>
+					</textElement>
+					<text><![CDATA[Gastos Totais do período:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="373" y="10" width="180" height="30" forecolor="#FFFFFF" uuid="614ebae9-11bf-4690-a314-bc2f6034c8b4">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Right">
+						<font size="18"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{totalValue}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="20" y="45" width="352" height="30" forecolor="#FFFFFF" uuid="477848f8-546c-436d-a21b-ed3a42e22602">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<textElement>
+						<font size="18"/>
+					</textElement>
+					<text><![CDATA[Gastos com abastecimento do período:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="373" y="45" width="180" height="30" forecolor="#FFFFFF" uuid="ea770927-4b1e-48e2-9d29-29fb9cf596e2">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Right">
+						<font size="18"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{totalValueSupplies}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="20" y="80" width="351" height="30" forecolor="#FFFFFF" uuid="fba551a3-4c0b-40e5-a11e-32c3f6a5e4cd">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<textElement>
+						<font size="18"/>
+					</textElement>
+					<text><![CDATA[Gastos com manutenções do período:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="373" y="80" width="180" height="30" forecolor="#FFFFFF" uuid="2a2fcfe6-ebe5-433c-9175-40d05b906f4e">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Right">
+						<font size="18"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{totalValueMaintenances}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+		<band height="140">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<subreport>
+				<reportElement stretchType="ElementGroupHeight" x="0" y="0" width="555" height="140" uuid="58f117a2-f856-4bd4-84bf-abe3581d79ea">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<subreportParameter name="suppliesDataSet">
+					<subreportParameterExpression><![CDATA[$P{suppliesDataSet}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[$P{suppliesDataSet}]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{path} + "/suppliesReports.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="145">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<subreport>
+				<reportElement stretchType="ElementGroupHeight" x="0" y="5" width="555" height="140" uuid="e544a343-d4ca-4af9-a3ad-dbf8c3035704">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<subreportParameter name="maintenancesDataSet">
+					<subreportParameterExpression><![CDATA[$P{maintenancesDataSet}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[$P{maintenancesDataSet}]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{path} + "/maintenancesReports.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="0" y="1" width="555" height="24" forecolor="#D0B48E" backcolor="#1FB8FF" uuid="2857bbc0-51d5-4ed7-b542-cefaeb4bdc36"/>
+				<textField evaluationTime="Report">
+					<reportElement x="513" y="0" width="40" height="20" forecolor="#FFFFFF" uuid="d3ed7bc6-6ef6-4e83-9691-406b1a607921"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="433" y="0" width="80" height="20" forecolor="#FFFFFF" uuid="87edde92-ff3c-4380-9545-f2a0dfda283a"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="2" y="1" width="197" height="20" forecolor="#FFFFFF" uuid="09939741-c641-46e1-9582-e814af1b519c"/>
+					<textElement verticalAlignment="Middle">
+						<font size="12" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{generationDate}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="210" y="1" width="197" height="20" forecolor="#FFFFFF" uuid="1f1f6f48-3011-4978-85d9-d83a07c2f4c9"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="11" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Busca: "+$P{searchedBy}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="110" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="10" width="555" height="95" backcolor="#0d1b2a" uuid="seal-frame-01"/>
+				<staticText>
+					<reportElement x="10" y="6" width="535" height="20" forecolor="#FFD700" uuid="seal-title-01"/>
+					<textElement textAlignment="Center">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[SELO DE INTEGRIDADE — AUDITORIA INDEPENDENTE AP04]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="10" y="30" width="80" height="14" forecolor="#AAAAAA" uuid="seal-label-hash"/>
+					<textElement><font size="8" isBold="true"/></textElement>
+					<text><![CDATA[Hash SHA-256:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="95" y="30" width="450" height="14" forecolor="#FFFFFF" uuid="seal-value-hash"/>
+					<textElement><font size="8" fontName="Courier New" pdfFontName="Courier"/></textElement>
+					<textFieldExpression><![CDATA[$P{sealHash}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="10" y="52" width="80" height="14" forecolor="#AAAAAA" uuid="seal-label-by"/>
+					<textElement><font size="8" isBold="true"/></textElement>
+					<text><![CDATA[Gerado por:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="95" y="52" width="200" height="14" forecolor="#FFFFFF" uuid="seal-value-by"/>
+					<textElement><font size="8"/></textElement>
+					<textFieldExpression><![CDATA[$P{sealGeneratedBy}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="10" y="72" width="80" height="14" forecolor="#AAAAAA" uuid="seal-label-ts"/>
+					<textElement><font size="8" isBold="true"/></textElement>
+					<text><![CDATA[Data/Hora:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="95" y="72" width="200" height="14" forecolor="#FFFFFF" uuid="seal-value-ts"/>
+					<textElement><font size="8"/></textElement>
+					<textFieldExpression><![CDATA[$P{sealTimestamp}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</summary>
+</jasperReport>

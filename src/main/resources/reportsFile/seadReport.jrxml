@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="seadReport" pageWidth="842" pageHeight="595" orientation="Landscape"
+              whenNoDataType="AllSectionsNoDetail"
+              columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20"
+              uuid="aead0001-0001-0001-0001-000000000001">
+
+  <style name="Title"   forecolor="#FFFFFF" fontName="Times New Roman" fontSize="22" isBold="true"/>
+  <style name="Header"  forecolor="#FFFFFF" fontName="Times New Roman" fontSize="11" isBold="true"/>
+  <style name="Detail"  fontName="Times New Roman" fontSize="10"/>
+  <style name="Row" mode="Transparent" fontName="Times New Roman" fontSize="10">
+    <conditionalStyle>
+      <conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+      <style mode="Opaque" backcolor="#F5F5F5"/>
+    </conditionalStyle>
+  </style>
+
+  <parameter name="mesReferencia"   class="java.lang.String"/>
+  <parameter name="totalBruto"      class="java.lang.String"/>
+  <parameter name="totalGlosado"    class="java.lang.String"/>
+  <parameter name="totalLiquido"    class="java.lang.String"/>
+  <parameter name="sealHash"        class="java.lang.String"/>
+  <parameter name="sealTimestamp"   class="java.lang.String"/>
+  <parameter name="sealGeneratedBy" class="java.lang.String"/>
+  <parameter name="generationDate"  class="java.lang.String"/>
+
+  <field name="placa"         class="java.lang.String"/>
+  <field name="dataTransacao" class="java.lang.String"/>
+  <field name="valorBruto"    class="java.lang.String"/>
+  <field name="valorGlosado"  class="java.lang.String"/>
+  <field name="valorLiquido"  class="java.lang.String"/>
+
+  <!-- CABEÇALHO -->
+  <title>
+    <band height="70">
+      <frame>
+        <reportElement mode="Opaque" x="0" y="0" width="802" height="68" backcolor="#003366" uuid="sead-h1"/>
+        <staticText>
+          <reportElement style="Title" x="0" y="6" width="802" height="30" uuid="sead-t1"/>
+          <textElement textAlignment="Center"/>
+          <text><![CDATA[RELATÓRIO SEAD — LIQUIDAÇÃO DE FATURA (BLOQUEIO AP 04)]]></text>
+        </staticText>
+        <textField>
+          <reportElement style="Title" x="0" y="38" width="802" height="24" uuid="sead-t2"/>
+          <textElement textAlignment="Center"><font fontSize="14"/></textElement>
+          <textFieldExpression><![CDATA["Referência: " + $P{mesReferencia}]]></textFieldExpression>
+        </textField>
+      </frame>
+    </band>
+  </title>
+
+  <!-- TOTAIS -->
+  <pageHeader>
+    <band height="40">
+      <frame>
+        <reportElement mode="Opaque" x="0" y="0" width="802" height="38" backcolor="#CCDDEE" uuid="sead-totais"/>
+        <staticText>
+          <reportElement x="10" y="10" width="120" height="20" uuid="sead-lb1"/>
+          <textElement><font isBold="true" fontSize="10"/></textElement>
+          <text><![CDATA[Gasto Bruto Total:]]></text>
+        </staticText>
+        <textField>
+          <reportElement x="135" y="10" width="130" height="20" uuid="sead-vb1"/>
+          <textElement><font fontSize="10"/></textElement>
+          <textFieldExpression><![CDATA[$P{totalBruto}]]></textFieldExpression>
+        </textField>
+        <staticText>
+          <reportElement x="290" y="10" width="130" height="20" uuid="sead-lb2"/>
+          <textElement><font isBold="true" fontSize="10" forecolor="#CC0000"/></textElement>
+          <text><![CDATA[Total Glosado (AP04):]]></text>
+        </staticText>
+        <textField>
+          <reportElement x="425" y="10" width="130" height="20" uuid="sead-vb2"/>
+          <textElement><font fontSize="10" forecolor="#CC0000"/></textElement>
+          <textFieldExpression><![CDATA[$P{totalGlosado}]]></textFieldExpression>
+        </textField>
+        <staticText>
+          <reportElement x="570" y="10" width="100" height="20" uuid="sead-lb3"/>
+          <textElement><font isBold="true" fontSize="10" forecolor="#006600"/></textElement>
+          <text><![CDATA[Valor Líquido (A Pagar):]]></text>
+        </staticText>
+        <textField>
+          <reportElement x="680" y="10" width="110" height="20" uuid="sead-vb3"/>
+          <textElement><font fontSize="10" forecolor="#006600"/></textElement>
+          <textFieldExpression><![CDATA[$P{totalLiquido}]]></textFieldExpression>
+        </textField>
+      </frame>
+    </band>
+  </pageHeader>
+
+  <!-- CABEÇALHO DA TABELA -->
+  <columnHeader>
+    <band height="22">
+      <frame>
+        <reportElement mode="Opaque" x="0" y="0" width="802" height="20" backcolor="#003366" uuid="sead-ch"/>
+        <staticText>
+          <reportElement style="Header" x="5"   y="2" width="100" height="16" uuid="sead-c1"/>
+          <text><![CDATA[Placa]]></text>
+        </staticText>
+        <staticText>
+          <reportElement style="Header" x="110" y="2" width="130" height="16" uuid="sead-c2"/>
+          <text><![CDATA[Data/Hora]]></text>
+        </staticText>
+        <staticText>
+          <reportElement style="Header" x="245" y="2" width="150" height="16" uuid="sead-c3"/>
+          <textElement textAlignment="Right"/>
+          <text><![CDATA[Valor Bruto]]></text>
+        </staticText>
+        <staticText>
+          <reportElement style="Header" x="400" y="2" width="180" height="16" uuid="sead-c4"/>
+          <textElement textAlignment="Right"/>
+          <text><![CDATA[Valor Glosado (AP04)]]></text>
+        </staticText>
+        <staticText>
+          <reportElement style="Header" x="585" y="2" width="212" height="16" uuid="sead-c5"/>
+          <textElement textAlignment="Right"/>
+          <text><![CDATA[Valor Líquido (A Pagar)]]></text>
+        </staticText>
+      </frame>
+    </band>
+  </columnHeader>
+
+  <!-- LINHAS DE DADOS -->
+  <detail>
+    <band height="18">
+      <textField>
+        <reportElement style="Row" x="5"   y="1" width="100" height="16" uuid="sead-d1"/>
+        <textFieldExpression><![CDATA[$F{placa}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement style="Row" x="110" y="1" width="130" height="16" uuid="sead-d2"/>
+        <textFieldExpression><![CDATA[$F{dataTransacao}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement style="Row" x="245" y="1" width="150" height="16" uuid="sead-d3"/>
+        <textElement textAlignment="Right"/>
+        <textFieldExpression><![CDATA[$F{valorBruto}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement style="Row" x="400" y="1" width="180" height="16" uuid="sead-d4"/>
+        <textElement textAlignment="Right" forecolor="#CC0000"/>
+        <textFieldExpression><![CDATA[$F{valorGlosado}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement style="Row" x="585" y="1" width="212" height="16" uuid="sead-d5"/>
+        <textElement textAlignment="Right" forecolor="#006600"/>
+        <textFieldExpression><![CDATA[$F{valorLiquido}]]></textFieldExpression>
+      </textField>
+    </band>
+  </detail>
+
+  <!-- RODAPÉ COM HASH -->
+  <pageFooter>
+    <band height="20">
+      <frame>
+        <reportElement mode="Opaque" x="0" y="0" width="802" height="18" backcolor="#1FB8FF" uuid="sead-pf"/>
+        <textField>
+          <reportElement x="2" y="1" width="300" height="16" forecolor="#FFFFFF" uuid="sead-pf1"/>
+          <textElement><font size="8"/></textElement>
+          <textFieldExpression><![CDATA[$P{generationDate}]]></textFieldExpression>
+        </textField>
+        <textField evaluationTime="Report">
+          <reportElement x="760" y="1" width="40" height="16" forecolor="#FFFFFF" uuid="sead-pf2"/>
+          <textElement textAlignment="Right"><font size="8"/></textElement>
+          <textFieldExpression><![CDATA["Pág. " + $V{PAGE_NUMBER}]]></textFieldExpression>
+        </textField>
+      </frame>
+    </band>
+  </pageFooter>
+
+  <!-- SELO SHA-256 -->
+  <summary>
+    <band height="80">
+      <frame>
+        <reportElement mode="Opaque" x="0" y="8" width="802" height="68" backcolor="#0d1b2a" uuid="sead-seal"/>
+        <staticText>
+          <reportElement x="10" y="5" width="782" height="18" forecolor="#FFD700" uuid="sead-sl1"/>
+          <textElement textAlignment="Center"><font size="11" isBold="true"/></textElement>
+          <text><![CDATA[SELO DE INTEGRIDADE — AUDITORIA INDEPENDENTE AP04 — SEAD LIQUIDAÇÃO]]></text>
+        </staticText>
+        <staticText>
+          <reportElement x="10" y="26" width="80" height="13" forecolor="#AAAAAA" uuid="sead-sl2"/>
+          <textElement><font size="8" isBold="true"/></textElement>
+          <text><![CDATA[Hash SHA-256:]]></text>
+        </staticText>
+        <textField>
+          <reportElement x="95" y="26" width="697" height="13" forecolor="#FFFFFF" uuid="sead-sl3"/>
+          <textElement><font size="8" fontName="Courier New" pdfFontName="Courier"/></textElement>
+          <textFieldExpression><![CDATA[$P{sealHash}]]></textFieldExpression>
+        </textField>
+        <staticText>
+          <reportElement x="10" y="43" width="80" height="13" forecolor="#AAAAAA" uuid="sead-sl4"/>
+          <textElement><font size="8" isBold="true"/></textElement>
+          <text><![CDATA[Gerado por:]]></text>
+        </staticText>
+        <textField>
+          <reportElement x="95" y="43" width="250" height="13" forecolor="#FFFFFF" uuid="sead-sl5"/>
+          <textElement><font size="8"/></textElement>
+          <textFieldExpression><![CDATA[$P{sealGeneratedBy}]]></textFieldExpression>
+        </textField>
+        <staticText>
+          <reportElement x="360" y="43" width="60" height="13" forecolor="#AAAAAA" uuid="sead-sl6"/>
+          <textElement><font size="8" isBold="true"/></textElement>
+          <text><![CDATA[Data/Hora:]]></text>
+        </staticText>
+        <textField>
+          <reportElement x="425" y="43" width="250" height="13" forecolor="#FFFFFF" uuid="sead-sl7"/>
+          <textElement><font size="8"/></textElement>
+          <textFieldExpression><![CDATA[$P{sealTimestamp}]]></textFieldExpression>
+        </textField>
+      </frame>
+    </band>
+  </summary>
+</jasperReport>
